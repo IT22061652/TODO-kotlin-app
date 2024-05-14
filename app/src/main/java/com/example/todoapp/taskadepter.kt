@@ -10,15 +10,19 @@ import android.widget.ImageSwitcher
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todoapp.databinding.ActivityAddtasksBinding
 
 class taskadepter(private var task:List<task>,context: Context):
+
     RecyclerView.Adapter<taskadepter.taskviewhelper>() {
 
 
     private val db:database= database(context)
 
-
+    private lateinit var myViewModel:MyViewmodel
+    private lateinit var binding: ActivityAddtasksBinding
 
 
     class taskviewhelper(taskview:View):RecyclerView.ViewHolder(taskview){
@@ -52,6 +56,7 @@ class taskadepter(private var task:List<task>,context: Context):
 
     override fun onBindViewHolder(holder:taskviewhelper, position: Int) {
         val task=task[position]
+
 
         holder.namev.text=task.name
         holder.prv.text=task.priority

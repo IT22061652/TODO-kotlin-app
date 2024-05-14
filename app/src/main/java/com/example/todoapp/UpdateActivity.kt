@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.databinding.ActivityAddtasksBinding
 import com.example.todoapp.databinding.ActivityUpdateBinding
 
@@ -13,6 +14,7 @@ class UpdateActivity :AppCompatActivity() {
     private lateinit var binding: ActivityUpdateBinding
     private lateinit var db: database
     private var taskid: Int = -1
+    private lateinit var myViewModel:MyViewmodel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,8 @@ class UpdateActivity :AppCompatActivity() {
         setContentView(binding.root)
 
         db = database(this)
+        myViewModel= ViewModelProvider(this).get(MyViewmodel::class.java)
+        binding.updatebutton.text=myViewModel.getupdatetext().toString()
 
         taskid = intent.getIntExtra("task_id", -1)
         if (taskid == -1) {

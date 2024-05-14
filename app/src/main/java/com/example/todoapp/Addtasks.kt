@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.databinding.ActivityAddtasksBinding
 import com.example.todoapp.databinding.ActivityMainBinding
 
@@ -11,12 +12,16 @@ class Addtasks : AppCompatActivity() {
     private lateinit var binding: ActivityAddtasksBinding
     private lateinit var db:database
 
+    private lateinit var myViewModel:MyViewmodel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityAddtasksBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         db= database(this)
+        myViewModel= ViewModelProvider(this).get(MyViewmodel::class.java)
+        binding.add.text=myViewModel.getregistertext().toString()
         binding.add.setOnClickListener {
 
             val name=binding.taskname.text.toString()
